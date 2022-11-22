@@ -21,6 +21,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     const response = await fetch(url);
 
     if (!response.ok) {
+      document.querySelector(".row").innerHTML += `
+    <div class="alert alert-danger" role="alert">
+      There was a problem gathering conference information.
+    </div>
+    `
     } else {
       const data = await response.json();
       let i = 0;
