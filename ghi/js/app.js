@@ -15,7 +15,7 @@ function createCard(name, description, pictureUrl, starts, ends, locName) {
 }
 function createPlaceholder() {
   return `
-  <div class="card" aria-hidden="true">
+  <div id="tempplaceholder" class="card" aria-hidden="true">
   <div class="card-body">
     <h5 class="card-title placeholder-glow">
       <span class="placeholder col-6"></span>
@@ -44,9 +44,6 @@ function createPlaceholder() {
 
 window.addEventListener("DOMContentLoaded", async () => {
   const url = "http://localhost:8000/api/conferences/";
-  document.querySelectorAll(".col-sm")[0].innerHTML = createPlaceholder();
-  document.querySelectorAll(".col-sm")[1].innerHTML = createPlaceholder();
-  document.querySelectorAll(".col-sm")[2].innerHTML = createPlaceholder();
   try {
     const response = await fetch(url);
 
@@ -59,8 +56,9 @@ window.addEventListener("DOMContentLoaded", async () => {
     } else {
       const data = await response.json();
       let i = 0;
-      let j = 0;
       for (let conference of data.conferences) {
+        if (i == 3) {i = 0;}
+        document.querySelectorAll(".col-sm")[i].innerHTML += createPlaceholder();
         const detailUrl = `http://localhost:8000${conference.href}`;
         const detailResponse = await fetch(detailUrl);
         if (detailResponse.ok) {
@@ -72,9 +70,9 @@ window.addEventListener("DOMContentLoaded", async () => {
           const ends = new Date(details.conference.ends);
           const locName = details.conference.location.name;
           const html = createCard(name, description, pictureUrl, starts.toLocaleDateString('en-US'), ends.toLocaleDateString('en-US'), locName);
-          if (i == 3) {i = 0;}
           const column = document.querySelectorAll(".col-sm")[i];
-          if (j < 3) {column.innerHTML = html; j++;} else {column.innerHTML += html;}
+          document.getElementById("tempplaceholder").remove();
+          column.innerHTML += html;
           i += 1;
         }
       }
