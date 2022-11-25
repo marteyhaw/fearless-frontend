@@ -57,7 +57,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       const data = await response.json();
       let i = 0;
       for (let conference of data.conferences) {
-        if (i == 3) {i = 0;}
         document.querySelectorAll(".col-sm")[i].innerHTML += createPlaceholder();
         const detailUrl = `http://localhost:8000${conference.href}`;
         const detailResponse = await fetch(detailUrl);
@@ -70,16 +69,15 @@ window.addEventListener("DOMContentLoaded", async () => {
           const ends = new Date(details.conference.ends);
           const locName = details.conference.location.name;
           const html = createCard(name, description, pictureUrl, starts.toLocaleDateString('en-US'), ends.toLocaleDateString('en-US'), locName);
-          const column = document.querySelectorAll(".col-sm")[i];
           document.getElementById("tempplaceholder").remove();
-          column.innerHTML += html;
-          i += 1;
+          document.querySelectorAll(".col-sm")[i].innerHTML += html;
+          i == 2 ? i = 0 : i += 1;
         }
       }
     }
   } catch (e) {
     console.error(e);
-    document.querySelector(".row").innerHTML = `
+    document.querySelector(".row").innerHTML += `
     <div class="alert alert-danger" role="alert">
       There was a problem gathering conference information.
       Error code: ${e}
