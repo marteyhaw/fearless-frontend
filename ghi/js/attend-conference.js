@@ -21,8 +21,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     const formData = new FormData(formTag);
     const json = JSON.stringify(Object.fromEntries(formData));
-    const conferenceSelected = document.getElementById("conference").selectedOptions[0]
-    const attendeesUrl = `http://localhost:8001${conferenceSelected.value}attendees/`;
+    const attendeesUrl = 'http://localhost:8001/api/attendees/';
     const fetchConfig = {
       method: "post",
       body: json,
@@ -32,7 +31,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     };
     const response = await fetch(attendeesUrl, fetchConfig);
     if (response.ok) {
-      formTag.reset();
+      document.getElementById("create-attendee-form").classList.add("d-none");
+      document.getElementById("success-message").classList.remove("d-none");
     }
   });
 });
