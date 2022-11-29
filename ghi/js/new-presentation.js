@@ -19,7 +19,8 @@ window.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     const formData = new FormData(formTag);
     const json = JSON.stringify(Object.fromEntries(formData));
-    const conferenceSelected = document.getElementById("conference").selectedOptions[0]
+    const conferenceSelected =
+      document.getElementById("conference").selectedOptions[0];
     const presentationUrl = `http://localhost:8000/api/conferences/${conferenceSelected.value}/presentations/`;
     const fetchConfig = {
       method: "post",

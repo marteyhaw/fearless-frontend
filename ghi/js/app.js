@@ -52,12 +52,13 @@ window.addEventListener("DOMContentLoaded", async () => {
     <div class="alert alert-danger" role="alert">
       There was a problem gathering conference information.
     </div>
-    `
+    `;
     } else {
       const data = await response.json();
       let i = 0;
       for (let conference of data.conferences) {
-        document.querySelectorAll(".col-sm")[i].innerHTML += createPlaceholder();
+        document.querySelectorAll(".col-sm")[i].innerHTML +=
+          createPlaceholder();
         const detailUrl = `http://localhost:8000${conference.href}`;
         const detailResponse = await fetch(detailUrl);
         if (detailResponse.ok) {
@@ -68,10 +69,17 @@ window.addEventListener("DOMContentLoaded", async () => {
           const starts = new Date(details.conference.starts);
           const ends = new Date(details.conference.ends);
           const locName = details.conference.location.name;
-          const html = createCard(name, description, pictureUrl, starts.toLocaleDateString('en-US'), ends.toLocaleDateString('en-US'), locName);
+          const html = createCard(
+            name,
+            description,
+            pictureUrl,
+            starts.toLocaleDateString("en-US"),
+            ends.toLocaleDateString("en-US"),
+            locName
+          );
           document.getElementById("tempplaceholder").remove();
           document.querySelectorAll(".col-sm")[i].innerHTML += html;
-          i == 2 ? i = 0 : i += 1;
+          i == 2 ? (i = 0) : (i += 1);
         }
       }
     }
@@ -82,6 +90,6 @@ window.addEventListener("DOMContentLoaded", async () => {
       There was a problem gathering conference information.
       Error code: ${e}
     </div>
-    `
+    `;
   }
 });
