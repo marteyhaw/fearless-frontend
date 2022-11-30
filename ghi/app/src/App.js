@@ -9,8 +9,8 @@ function App(props) {
   return (
     <>
       <Nav />
-      <div className="container">
-        <table className="table table-striped">
+      <div className="container-fluid">
+        <table className="table table-striped table-hover">
           <thead>
             <tr>
               <th>Name</th>
