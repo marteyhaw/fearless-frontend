@@ -91,7 +91,7 @@ class AttendeeForm extends React.Component {
             <img
               width="300"
               className="bg-white rounded shadow d-block mx-auto mb-4"
-              src="./logo.svg"
+              src="/logo.svg"
               alt="logo"
             />
           </div>

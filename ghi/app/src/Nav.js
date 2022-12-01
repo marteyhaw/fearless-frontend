@@ -1,3 +1,5 @@
+import { NavLink, Outlet } from "react-router-dom";
+
 function Nav() {
   return (
     <>
@@ -25,39 +27,40 @@ function Nav() {
                 </a>
               </li>
               <li className="nav-item">
-                <a
+                <NavLink
                   id="nav-new-location"
                   className="nav-link"
                   aria-current="page"
-                  href="new-location.html"
+                  to="/locations/new"
                 >
                   New location
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a
+                <NavLink
                   id="nav-new-conference"
                   className="nav-link"
                   aria-current="page"
-                  href="new-conference.html"
+                  to="/conferences/new"
                 >
                   New conference
-                </a>
+                </NavLink>
               </li>
               <li className="nav-item">
-                <a
+                <NavLink
                   id="nav-new-presentation"
                   className="nav-link"
                   aria-current="page"
-                  href="new-presentation.html"
+                  to="/presentations/new"
                 >
                   New presentation
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+      <Outlet />
     </>
   );
 }
